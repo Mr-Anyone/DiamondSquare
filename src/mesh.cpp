@@ -13,7 +13,7 @@ void Mesh::loadData()
     glBufferData(GL_ARRAY_BUFFER, sizeof(float) * m_vertexSize, m_vertices, GL_STATIC_DRAW);
 
     // Position    
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_TRUE, 3 * sizeof(float), (void *)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *)0);
     glEnableVertexAttribArray(0); 
 
     // EBO
@@ -45,17 +45,22 @@ Mesh makeTerrainMesh(){
     float** grid {new float* [TERRAIN_HEIGHT]};
     makeGrid(grid);
     makeDiamondSquareMesh(grid, 0, 2, Point{0, 0}, TERRAIN_HEIGHT - 1);
-    printGrid(grid);
+
+    // Debugging settings
+    // printGrid(grid);
+    
     // Making vertices 
-    const std::size_t verticesSize = TERRAIN_WIDTH * TERRAIN_HEIGHT;
+    const std::size_t verticesSize = TERRAIN_WIDTH * TERRAIN_HEIGHT * 3;
     float* vertices {new float[verticesSize]}; 
     int count {0};
     for(int y=0; y<TERRAIN_HEIGHT; ++y)
     {
         for(int x =0; x<TERRAIN_WIDTH; ++x)
         {
-            vertices[count] = grid[y][x];
-            ++count;
+            vertices[count] = x; 
+            vertices[count + 1] = y; 
+            vertices[count+ 2]  = grid[y][x];
+            count += 3;
         }
     }
 
@@ -79,6 +84,9 @@ Mesh makeTerrainMesh(){
         }
     }
 
+    // Mesh has to be made before deallocation happens
+    Mesh terrainMesh  {vertices, indices, verticesSize, indicesSize};
+    
     // Remeber to deallocate grid 
     delete [] vertices; 
     // grid is a two dimensional array
@@ -87,5 +95,5 @@ Mesh makeTerrainMesh(){
     delete [] grid; 
     delete [] indices;
 
-    return Mesh {vertices, indices, verticesSize, indicesSize};
+    return terrainMesh;
 }
