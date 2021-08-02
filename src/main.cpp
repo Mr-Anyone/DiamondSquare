@@ -42,13 +42,15 @@ int main()
         0, 1, 2
     };
     Mesh mesh (vertices, indices, 9, 3); 
-
+    Mesh terrain = makeTerrainMesh();
+    
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     while(!glfwWindowShouldClose(window))
     {
         clearScreen();
-
         shader.use();
         mesh.draw(shader);
+        // terrain.draw(shader);
 
         processInput(window);
         glfwSwapBuffers(window);

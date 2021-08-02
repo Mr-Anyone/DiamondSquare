@@ -6,6 +6,7 @@
 #include <GLFW/glfw3.h> 
 
 #include "shader.h"
+#include "terrain.h"
 
 class Mesh{
 private: 
@@ -46,4 +47,5 @@ public:
     void draw(const Shader& shader) const;
 }; 
 
+Mesh makeTerrainMesh();
 #endif

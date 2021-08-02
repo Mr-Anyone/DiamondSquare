@@ -47,16 +47,16 @@ float gridAverage(float**grid, Point topRight, Point topLeft, Point bottomLeft, 
 void diamondStep(float**grid, Point topLeft, int boxLength, float average, float startRange, float endRange)
 {
     Point boxCenter {topLeft.x + boxLength / 2,  topLeft.y + boxLength / 2 };
-    grid[boxCenter.y][boxCenter.x] = average + getRandomValue(startRange, endRange);
+    grid[boxCenter.y][boxCenter.x] += average + getRandomValue(startRange, endRange);
 }
 
 void squareStep(float ** grid, Point topLeft,  Point bottomRight, float average, int startRange, int endRange, int length)
 {
     length /= 2 ;
-    grid[topLeft.y][topLeft.x  + length] = average + getRandomValue(startRange, endRange);
-    grid[topLeft.y + length][topLeft.x] = average + getRandomValue(startRange, endRange);
-    grid[bottomRight.y - length][bottomRight.x] = average + getRandomValue(startRange, endRange);
-    grid[bottomRight.y][bottomRight.x - length] = average + getRandomValue(startRange, endRange);
+    grid[topLeft.y][topLeft.x  + length] += average + getRandomValue(startRange, endRange);
+    grid[topLeft.y + length][topLeft.x] += average + getRandomValue(startRange, endRange);
+    grid[bottomRight.y - length][bottomRight.x] += average + getRandomValue(startRange, endRange);
+    grid[bottomRight.y][bottomRight.x - length] += average + getRandomValue(startRange, endRange);
 }
 
 void makeDiamondSquareMesh(float**grid, float startRange, float endRange, Point topLeft, int boxLength)
@@ -70,7 +70,7 @@ void makeDiamondSquareMesh(float**grid, float startRange, float endRange, Point 
     float average {gridAverage(grid, topRight, topLeft, bottomLeft, bottomRight)}; 
     diamondStep(grid, topLeft, boxLength, average, startRange, endRange); 
     
-    // Doing Square Step
+// Doing Square Step
     squareStep(grid, topLeft,  bottomRight, average, startRange, endRange, boxLength); 
 
     // Print Grid for debugging
