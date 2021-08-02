@@ -17,7 +17,7 @@ constexpr int height_g {1080};
 
 // Global variable for view 
 Camera camera_g {glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 0.0f)};
-const glm::mat4 projection_g {glm::perspective(glm::radians(45.0f), static_cast<float> (width_g) / height_g, 0.1f, 100.0f)};
+const glm::mat4 projection_g {glm::perspective(glm::radians(45.0f), static_cast<float> (width_g) / height_g, 0.1f, 200.0f)};
 
 void clearScreen()
 {

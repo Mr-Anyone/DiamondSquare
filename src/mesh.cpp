@@ -57,8 +57,8 @@ Mesh makeTerrainMesh(){
     {
         for(int x =0; x<TERRAIN_WIDTH; ++x)
         {
-            vertices[count] = x; 
-            vertices[count + 1] = y; 
+            vertices[count] = 3 * x; 
+            vertices[count + 1] = 3 * y; 
             vertices[count+ 2]  = grid[y][x];
             count += 3;
         }
