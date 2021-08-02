@@ -1,8 +1,8 @@
 #ifndef TERRAIN_H 
 #define TERRAIN_H
 
-#define TERRAIN_HEIGHT 9
-#define TERRAIN_WIDTH 9
+#define TERRAIN_HEIGHT 1029
+#define TERRAIN_WIDTH 1029
 
 struct Point
 {
