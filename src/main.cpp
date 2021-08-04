@@ -7,6 +7,7 @@
 #include "shader.h"
 #include "terrain.h"
 #include "mesh.h"
+#include "light.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -76,6 +77,7 @@ void drawTerrain(const Shader& shader, const Mesh& mesh)
     model = glm::scale(model, glm::vec3 (5.0f, 5.0f, 5.0f));
     
     shader.use(); 
+    setPointLight(shader, camera_g.getPosition(), lightPos, LightSettings::PointLights::whiteLight, LightSettings::Materials::gold);
     // Think of a better way to achieve this
     glUniformMatrix4fv(glGetUniformLocation(shader.ID, "projection"), 1, GL_FALSE, glm::value_ptr(projection_g));
     glUniformMatrix4fv(glGetUniformLocation(shader.ID, "view"), 1, GL_FALSE, glm::value_ptr(camera_g.getView()));
