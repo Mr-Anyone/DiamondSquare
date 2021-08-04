@@ -8,15 +8,16 @@
 #include "shader.h"
 #include "terrain.h"
 
+// IMPORTANT: Think of a way to do copying and moving data around
+
 class Mesh{
-private: 
+protected: 
     unsigned int VAO, EBO, VBO;
     float* m_vertices;
     unsigned int* m_indices;
-    
+
     std::size_t m_indicesSize; 
     std::size_t m_vertexSize;
-    void loadData() ;
 public:
     Mesh(float* vertices, unsigned int* indices, std::size_t vertices_size, std::size_t indices_size):
         m_indicesSize{indices_size}, m_vertexSize {vertices_size}
@@ -29,8 +30,6 @@ public:
         
         for(int i = 0; i<indices_size; ++i)
             m_indices[i] = indices[i];
-        
-        this->loadData();
     }
 
     ~Mesh()
@@ -41,11 +40,33 @@ public:
         if(m_indices != nullptr)
             delete [] m_indices;
     }
+    // Think of a move contructor
 
     // Assumed Shader is bound
-    void draw() const;
-    void draw(const Shader& shader) const;
+    virtual void draw() const;
+    virtual void draw(const Shader& shader) const;
+
+    // To load data, you have explicitly call this function
+    virtual void loadData();
 }; 
 
-Mesh makeTerrainMesh();
+// The only difference is that terrain mesh will have normal vectors in its vertices
+class TerrainMesh: public Mesh
+{
+protected:
+    virtual void loadData() ;
+public: 
+    TerrainMesh(float* vertices, unsigned int *indices, std::size_t verticesSize, std::size_t indicesSize):
+        Mesh {vertices, indices, verticesSize, indicesSize}
+    {
+        TerrainMesh::loadData();
+    }
+
+    ~TerrainMesh()
+    {
+        std::cout << "Deallocate memory" << std::endl;
+    }
+};
+
+TerrainMesh makeTerrainMesh();
 #endif
