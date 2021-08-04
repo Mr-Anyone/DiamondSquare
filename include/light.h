@@ -26,7 +26,7 @@ namespace LightSettings{
         const Material gold {glm::vec3(0.24725, 0.1995, 0.0745), glm::vec3(0.75164, 0.60648, 0.22648), glm::vec3(0.628281, 0.555802, 0.366065), 0.4};
     };
     namespace PointLights{
-        const PointLight whiteLight {glm::vec3(1.01f, 1.0f, 1.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(1.0f, 1.0f, 1.0f), 1.0f, 0.07f, 0.017f};
+        const PointLight whiteLight {glm::vec3(1.01f, 1.0f, 1.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec3(1.0f, 1.0f, 1.0f), 1.0f, 0.007f, 0.0002f};
     };
     
 }; 
